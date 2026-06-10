@@ -1,0 +1,47 @@
+---
+description: Git commit standards — no Cursor co-author attribution
+alwaysApply: true
+---
+
+# Git Commits
+
+## No Cursor co-author
+
+Never include `Co-authored-by: Cursor <cursoragent@cursor.com>` (or any Cursor co-author trailer) in commit messages. Commits must show only the user's authorship on GitHub.
+
+## How to commit safely
+
+Cursor may auto-inject the co-author line via `git commit`. When committing in this repo:
+
+1. Write the message to a temp file (no co-author lines).
+2. Create the commit with direct Git, bypassing injection:
+
+```powershell
+$tree = (git rev-parse "HEAD^{tree}").Trim()
+# For new commits on top of HEAD, use normal parent; for amend of tip, use HEAD^ or commit-tree with -p
+& "C:\Program Files\Git\mingw64\bin\git.exe" commit-tree $tree -p (git rev-parse HEAD^) -F path/to/msg.txt
+```
+
+For a **new commit** (not rewriting history), prefer:
+
+```powershell
+git add <files>
+& "C:\Program Files\Git\mingw64\bin\git.exe" commit -F path/to/msg.txt --no-verify
+```
+
+If the message still contains `Co-authored-by: Cursor`, rewrite with `git.exe commit-tree` and `git reset --hard <new-sha>` before pushing.
+
+## Before push
+
+Verify the message is clean:
+
+```powershell
+git log -1 --format=%B
+```
+
+Reject and fix any commit that still contains `Co-authored-by: Cursor`.
+
+## Push policy
+
+- Do not push unless the user asks.
+- Do not force-push to `main` unless the user explicitly requests fixing commit metadata (e.g. removing co-author).

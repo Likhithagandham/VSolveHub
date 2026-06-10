@@ -4,3 +4,7 @@ Thumbs.db
 *.log
 .env
 .env.*
+
+# Next.js
+.next/
+out/
