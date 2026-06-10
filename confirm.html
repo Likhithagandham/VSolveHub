@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed — VSolveHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-booking">
+  <header class="site-header site-header--minimal">
+    <a href="index.html" class="logo"><span class="logo-mark">VSH</span></a>
+    <nav class="flow-steps" aria-label="Booking progress">
+      <span class="flow-step done">Book</span>
+      <span class="flow-step done">OTP</span>
+      <span class="flow-step active">Confirm</span>
+      <span class="flow-step">Track</span>
+    </nav>
+  </header>
+
+  <main class="booking-main">
+    <section class="section booking-card-section">
+      <div class="section-inner booking-card">
+        <div class="confirm-icon" aria-hidden="true">✓</div>
+        <h1 class="section-title">Booking Confirmed</h1>
+        <p class="lead-hint">We'll assign a worker and call you shortly.</p>
+
+        <dl class="booking-summary" id="booking-summary"></dl>
+
+        <span class="status-badge status-confirmed" id="confirm-status">Confirmed</span>
+
+        <div class="booking-actions">
+          <a href="track.html" class="btn-primary">Track Booking</a>
+          <a href="index.html" class="btn-secondary">Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="confirm.js"></script>
+</body>
+</html>

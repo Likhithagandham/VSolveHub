@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VSolveHub FAQ — answers about booking doorstep services, workers, payments and more.">
+  <title>FAQ — VSolveHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-faq">
+  <header class="site-header">
+    <a href="index.html" class="logo" aria-label="VSolveHub home">
+      <span class="logo-mark">VSH</span>
+    </a>
+    <nav class="nav-desktop" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#categories">Services</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="lang-toggle" aria-label="Change language" title="English / తెలుగు / हिंदी">
+        <span class="lang-icon">🌐</span>
+        <span class="lang-label">EN</span>
+      </button>
+      <a href="contact.html" class="btn-store">Contact</a>
+      <button type="button" class="btn-menu" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <nav aria-label="Mobile navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#categories">Services</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="jobs.html">Jobs</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="page-hero page-hero--faq" aria-labelledby="faq-heading">
+      <div class="page-hero-content section-inner">
+        <p class="hero-eyebrow">Help Centre</p>
+        <h1 id="faq-heading">Frequently Asked Questions</h1>
+        <p class="hero-tagline">Quick answers about booking, workers, payments and services.</p>
+      </div>
+    </section>
+
+    <section class="section faq-section">
+      <div class="section-inner">
+        <!-- W7: Search / filter -->
+        <div class="faq-search-wrap">
+          <label for="faq-search" class="visually-hidden">Search FAQs</label>
+          <input type="search" id="faq-search" class="faq-search" placeholder="Search questions…" autocomplete="off">
+          <svg class="faq-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>
+          </svg>
+        </div>
+
+        <p class="faq-no-results" id="faq-no-results" hidden>No matching questions found. Try a different search or <a href="contact.html">contact us</a>.</p>
+
+        <!-- W7: Accordion per category (SEO-friendly details/summary) -->
+        <div class="faq-categories" id="faq-categories"></div>
+      </div>
+    </section>
+
+    <!-- W7: Contact CTA at bottom -->
+    <section class="section faq-cta-section" aria-labelledby="faq-cta-heading">
+      <div class="section-inner faq-cta-inner">
+        <h2 id="faq-cta-heading" class="section-title">Still have questions?</h2>
+        <p>Our support team is ready to help — reach out via WhatsApp, phone or the contact form.</p>
+        <div class="faq-cta-buttons">
+          <a href="contact.html" class="btn-hero-cta">Contact Us</a>
+          <a href="#" id="faq-whatsapp" class="btn-secondary btn-secondary--dark" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links footer-links--inline">
+        <div class="footer-col">
+          <a href="index.html">Home</a>
+          <a href="faq.html">FAQ</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col footer-social">
+          <a href="#" rel="noopener">Facebook</a>
+          <a href="#" rel="noopener">Instagram</a>
+          <a href="#" id="footer-whatsapp" rel="noopener" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <span>© 2026 VSolveHub. All rights reserved.</span>
+      </div>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">VSolveHub</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script src="faq.js"></script>
+</body>
+</html>

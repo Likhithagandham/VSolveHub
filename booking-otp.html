@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Phone — VSolveHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-booking">
+  <header class="site-header site-header--minimal">
+    <a href="index.html" class="logo"><span class="logo-mark">VSH</span></a>
+    <nav class="flow-steps" aria-label="Booking progress">
+      <span class="flow-step done">Book</span>
+      <span class="flow-step active">OTP</span>
+      <span class="flow-step">Confirm</span>
+      <span class="flow-step">Track</span>
+    </nav>
+  </header>
+
+  <main class="booking-main">
+    <section class="section booking-card-section">
+      <div class="section-inner booking-card">
+        <h1 class="section-title">Verify your phone</h1>
+        <p class="lead-hint" id="otp-phone-hint">Enter the 6-digit code sent to your mobile.</p>
+
+        <form id="booking-otp-form">
+          <div class="form-field">
+            <label for="booking-otp">OTP Code</label>
+            <input type="text" id="booking-otp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit code" required autocomplete="one-time-code">
+            <span class="field-hint" id="otp-demo-hint"></span>
+          </div>
+          <p class="form-error" id="otp-error" role="alert" hidden></p>
+          <button type="submit" class="btn-primary">Verify & Continue</button>
+          <button type="button" class="btn-secondary" id="resend-booking-otp">Resend OTP</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="booking-otp.js"></script>
+</body>
+</html>
