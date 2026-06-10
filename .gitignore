@@ -8,3 +8,6 @@ Thumbs.db
 # Next.js
 .next/
 out/
+
+# npm (project uses pnpm)
+package-lock.json
