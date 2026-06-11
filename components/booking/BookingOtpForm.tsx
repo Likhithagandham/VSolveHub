@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getBooking, markUserRegistered, saveBooking } from '@/lib/data';
+import { addBookingToHistory, loginSession } from '@/lib/profile-store';
 
 function generateOtp() {
   return String(Math.floor(100000 + Math.random() * 900000));
@@ -39,8 +40,10 @@ export function BookingOtpForm() {
       return;
     }
     markUserRegistered(booking!.phone);
+    loginSession(booking!.phone);
     const updated = { ...booking!, otpVerified: true, status: 'confirmed' };
     saveBooking(updated);
+    addBookingToHistory(updated);
     router.push('/booking/confirm');
   }
 

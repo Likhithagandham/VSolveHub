@@ -3,3 +3,6 @@ packages:
 
 allowBuilds:
   sharp: true
+
+# Flat node_modules (like npm) — required for Next.js to resolve @swc/helpers
+nodeLinker: hoisted

@@ -1,8 +1,8 @@
 ﻿# VSolveHub ΓÇö Quick Service Hub
 
-**VSolveHub** is a public marketing and booking website for an India-focused doorstep services marketplace. Customers browse nine service categories, open individual service pages, and submit enquiries. Workers can register for job opportunities. The UI is designed for first-time smartphone users in Tier 2 and Tier 3 cities ΓÇö large touch targets, minimal forms, and a calm cream-and-lime visual language.
+**VSolveHub** is a public marketing and booking website for an India-focused doorstep services marketplace. Customers browse eight service categories, open individual service pages, and submit enquiries. The UI is designed for first-time smartphone users in Tier 2 and Tier 3 cities — large touch targets, minimal forms, and a mobile-first coral theme.
 
-This repository contains the **customer-facing website** only. Worker app, customer app, and admin dashboard flows are documented in `FLOWS.md` as product reference; they are not implemented here.
+This repository contains the **customer-facing website** only. Job opportunities and worker onboarding live in a separate app (not in this repo).
 
 ---
 
@@ -26,14 +26,13 @@ This repository contains the **customer-facing website** only. Worker app, custo
 
 ## Features
 
-- **Home page** ΓÇö hero, 9-category grid, how-it-works steps, testimonial carousel, lead callback form, sticky WhatsApp strip
+- **Home page** — greeting, category grid, ongoing booking card, top professionals carousel
 - **Category listings** ΓÇö sub-category filter tabs, grouped service sections, breadcrumb navigation
 - **Service detail pages** ΓÇö per-service description, pricing, and dedicated booking form
 - **Booking journey** ΓÇö phone OTP (demo), confirmation summary, status timeline (client-side session storage)
-- **Worker registration** ΓÇö skill-based signup with OTP verification on `/jobs`
-- **Content pages** ΓÇö About, Contact (with map), Gallery (filters + lightbox), FAQ (searchable accordions)
+- **Content pages** — About, Contact (with map), Gallery (filters + lightbox), FAQ (searchable accordions)
 - **Responsive layout** ΓÇö mobile menu, WhatsApp FAB, newsletter footer with app QR placeholder
-- **1,000+ catalogued services** ΓÇö structured data with sub-categories across all verticals
+- **850+ catalogued services** — structured data with sub-categories across all verticals
 
 ---
 
@@ -111,7 +110,6 @@ Serves the optimized build on port 3000 by default.
 | Contact | `/contact` | Enquiry form, phone/email/WhatsApp strip, map |
 | Gallery | `/gallery` | Masonry grid with category filters and lightbox |
 | FAQ | `/faq` | Searchable accordion by topic |
-| Jobs | `/jobs` | Worker registration with OTP |
 | Booking OTP | `/booking/otp` | Phone verification for new customers |
 | Booking confirm | `/booking/confirm` | Booking reference and summary |
 | Track booking | `/booking/track` | Status timeline |
@@ -122,7 +120,6 @@ Serves the optimized build on port 3000 by default.
 http://localhost:3000/
 http://localhost:3000/services/technician
 http://localhost:3000/services/accommodation/7001
-http://localhost:3000/jobs
 http://localhost:3000/booking/otp
 ```
 
@@ -132,7 +129,7 @@ Category pages are statically generated at build time. Service detail pages are 
 
 ## Service categories
 
-Nine top-level categories, each with sub-categories and individual bookable services defined in `lib/data.ts`.
+Eight top-level categories, each with sub-categories and individual bookable services defined in `lib/data.ts`.
 
 | ID | Name | Services |
 |----|------|----------|
@@ -144,11 +141,10 @@ Nine top-level categories, each with sub-categories and individual bookable serv
 | `rental` | Equipment Rental | 101 |
 | `vehicle` | Vehicle Services | 133 |
 | `accommodation` | Rooms / PG / Hostel | 94 |
-| `jobs` | Job Opportunities | 222 |
 
-**Total:** 1,072 catalogued services.
+**Total:** 850 catalogued services.
 
-Service IDs are assigned by range: construction `1001+`, technician `2001+`, beautician `3001+`, events `4001+`, rental `5001+`, vehicle `6001+`, accommodation `7001+`, jobs `8001+`, manpower `9001+`.
+Service IDs are assigned by range: construction `1001+`, technician `2001+`, beautician `3001+`, events `4001+`, rental `5001+`, vehicle `6001+`, accommodation `7001+`, manpower `9001+`.
 
 ---
 
@@ -185,7 +181,6 @@ VSolveHub/
 Γöé   Γö£ΓöÇΓöÇ contact/
 Γöé   Γö£ΓöÇΓöÇ faq/
 Γöé   Γö£ΓöÇΓöÇ gallery/
-Γöé   Γö£ΓöÇΓöÇ jobs/
 Γöé   Γö£ΓöÇΓöÇ booking/                  # OTP, confirm, track (+ shared layout)
 Γöé   ΓööΓöÇΓöÇ services/
 Γöé       ΓööΓöÇΓöÇ [cat]/
@@ -199,7 +194,6 @@ VSolveHub/
 Γöé   Γö£ΓöÇΓöÇ contact/                  # Contact enquiry form
 Γöé   Γö£ΓöÇΓöÇ gallery/                  # Masonry grid + lightbox
 Γöé   Γö£ΓöÇΓöÇ faq/                      # Search + accordions
-Γöé   Γö£ΓöÇΓöÇ jobs/                     # Worker registration
 Γöé   ΓööΓöÇΓöÇ ui/                       # Shared icon renderer
 Γö£ΓöÇΓöÇ lib/
 Γöé   ΓööΓöÇΓöÇ data.ts                   # Catalogs, services, FAQ, booking helpers
@@ -250,12 +244,14 @@ Visual design follows **`DESIGN.md`** ΓÇö a minimalist e-commerce-inspired sy
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `bg-cream` | `#EDE8DF` | Page background |
-| `accent-lime` | `#C8FF00` | CTAs, action buttons |
-| `text-primary` | `#0A0A0A` | Body and headings |
-| `footer-dark` | `#141414` | Footer background |
+| `bg-cream` | `#FFF1F0` | Page background |
+| `accent` | `#FD4C4A` | CTAs, action buttons |
+| `accent-dark` | `#8B2E2C` | Hover states, heroes |
+| `text-primary` | `#1A0A0A` | Body and headings |
+| `footer-dark` | `#3A1514` | Footer background |
 
-- **Typography:** Syne (display, uppercase headings) + DM Sans (body)
+- **Typography:** Roboto (mobile-first, Google Stitch style)
+- **Layout:** Bottom nav, card UI, single-column mobile shell
 - **Touch targets:** minimum 48├ù48px
 - **Spacing:** 8px base grid
 - **Components:** category cards, sub-service cards, filter pills, enquiry forms, booking timeline

@@ -5,11 +5,13 @@
   "packageManager": "pnpm@11.2.2",
   "scripts": {
     "dev": "next dev",
+    "dev:clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\" && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@swc/helpers": "^0.5.15",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

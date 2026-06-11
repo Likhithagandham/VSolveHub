@@ -42,7 +42,6 @@ export function SiteFooter({ whatsappMessage = 'Hi VSolveHub, I need help with a
             <div className="footer-col">
               <Link href="/gallery">Gallery</Link>
               <Link href="/about">About</Link>
-              <Link href="/jobs">Jobs</Link>
             </div>
             <div className="footer-col footer-social">
               <a href="#" rel="noopener">Facebook</a>

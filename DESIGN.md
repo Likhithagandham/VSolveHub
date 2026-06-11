@@ -12,25 +12,28 @@
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `bg-cream` | `#EDE8DF` | Page background |
-| `bg-card` | `#D4D0C8` | Service card image placeholder |
-| `text-primary` | `#0A0A0A` | Headings, body, icons |
-| `accent-lime` | `#C8FF00` | CTAs, inputs, action buttons |
-| `footer-dark` | `#141414` | Footer background |
-| `text-inverse` | `#FFFFFF` | Footer text |
+| `bg-cream` | `#FFF1F0` | Page background |
+| `bg-card` | `#F9C5C3` | Service card image placeholder |
+| `text-primary` | `#1A0A0A` | Headings, body, icons |
+| `accent` | `#FD4C4A` | CTAs, inputs, action buttons |
+| `accent-light` | `#FFE8E7` | Subtle highlights, skeletons |
+| `accent-mid` | `#F57E7C` | Gradients, secondary surfaces |
+| `accent-dark` | `#8B2E2C` | Hover states, page heroes |
+| `footer-dark` | `#3A1514` | Footer background |
+| `text-inverse` | `#FFFFFF` | Text on accent/dark surfaces |
 | `whatsapp` | `#25D366` | Floating WhatsApp button |
 
 ## Typography
 
-- **Display / Headings:** Syne (700–800), uppercase, tight tracking
-- **Body / UI:** DM Sans (400–500)
-- **Footer wordmark:** Syne Italic 800, oversized
+- **All UI:** Roboto (400 body, 500 labels, 700 headings) — Google Stitch mobile style
+- **Case:** Sentence case (no forced uppercase)
+- **Footer wordmark:** Roboto 700, oversized watermark
 
 ### Scale
 
-- Hero title: `clamp(3rem, 8vw, 6rem)`
-- Section label: `0.75rem` uppercase, letter-spacing `0.12em`
-- Card title: `0.875rem` uppercase
+- Hero title: `clamp(1.35rem, 5vw, 1.75rem)`
+- Section title: `1.15rem` / weight 700
+- Card title: `0.95rem` / weight 700
 - Body: `1rem` / line-height `1.5`
 
 ## Spacing Grid
@@ -52,9 +55,17 @@ Minimum **48×48px** for all interactive elements.
 
 ### Cards
 
-- Corner radius: `4px`
+- Corner radius: `12px`
+- Shadow: `0 2px 12px rgba(0,0,0,0.08)`
 - Internal padding: `16px`
 - Image aspect ratio: `1:1`
+
+### Mobile shell
+
+- Bottom nav: 64px fixed (Home, Services, Bookings, Profile)
+- Sticky header with location pill on home
+- Horizontal category chips with scroll
+- Single-column layouts below 768px
 
 ### Filter Pills
 
@@ -66,7 +77,7 @@ Minimum **48×48px** for all interactive elements.
 ### Primary CTA
 
 - Full-width on mobile forms
-- Background: `accent-lime`
+- Background: `accent`
 - Min height: `52px`
 
 ### Status Indicators

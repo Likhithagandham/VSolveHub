@@ -3,15 +3,16 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { BOOKING_STATUSES, Booking, getBooking } from '@/lib/data';
+import { getProfileData } from '@/lib/profile-store';
 
 export function StatusTimeline() {
   const router = useRouter();
   const [booking, setBooking] = useState<Booking | null>(null);
 
   useEffect(() => {
-    const b = getBooking();
+    const b = getBooking() ?? getProfileData().bookings[0] ?? null;
     if (!b) {
-      router.replace('/');
+      router.replace('/profile/bookings');
       return;
     }
     setBooking(b);

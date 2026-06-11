@@ -10,9 +10,11 @@ export function CategoryGrid() {
           <div className="category-card-icon">
             <Icon name={cat.icon} />
           </div>
-          <h3 className="category-card-title">{cat.name}</h3>
-          <p className="category-card-tagline">{cat.tagline}</p>
-          <span className="category-card-count">{cat.count} services</span>
+          <div className="category-card-body">
+            <h3 className="category-card-title">{cat.name}</h3>
+            <p className="category-card-tagline">{cat.tagline}</p>
+            <span className="category-card-count">{cat.count} services</span>
+          </div>
           <span className="category-card-arrow" aria-hidden="true" dangerouslySetInnerHTML={{ __html: ARROW_SVG }} />
         </Link>
       ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   Booking,
@@ -9,6 +9,7 @@ import {
   isReturningUser,
   saveBooking,
 } from '@/lib/data';
+import { addBookingToHistory, getProfileData, loginSession } from '@/lib/profile-store';
 
 type BookingFormProps = {
   serviceId: number;
@@ -20,6 +21,12 @@ export function BookingForm({ serviceId, serviceName, categoryId }: BookingFormP
   const router = useRouter();
   const category = getCategory(categoryId);
   const today = new Date().toISOString().split('T')[0];
+  const [defaults, setDefaults] = useState({ name: '', phone: '' });
+
+  useEffect(() => {
+    const profile = getProfileData();
+    setDefaults({ name: profile.user.name, phone: profile.user.phone });
+  }, []);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -43,10 +50,13 @@ export function BookingForm({ serviceId, serviceName, categoryId }: BookingFormP
       createdAt: new Date().toISOString(),
     };
 
+    loginSession(phone);
+
     if (isReturningUser(phone)) {
       booking.status = 'confirmed';
       booking.otpVerified = true;
       saveBooking(booking);
+      addBookingToHistory(booking);
       router.push('/booking/confirm');
     } else {
       saveBooking(booking);
@@ -58,11 +68,11 @@ export function BookingForm({ serviceId, serviceName, categoryId }: BookingFormP
     <form className="enquiry-form" onSubmit={onSubmit}>
       <div className="form-field">
         <label htmlFor="booking-name">Your Name</label>
-        <input type="text" id="booking-name" name="name" placeholder="Full name" required />
+        <input type="text" id="booking-name" name="name" placeholder="Full name" defaultValue={defaults.name} required />
       </div>
       <div className="form-field">
         <label htmlFor="booking-phone">Phone Number</label>
-        <input type="tel" id="booking-phone" name="phone" placeholder="10-digit mobile number" inputMode="numeric" pattern="[0-9]{10}" required />
+        <input type="tel" id="booking-phone" name="phone" placeholder="10-digit mobile number" inputMode="numeric" pattern="[0-9]{10}" defaultValue={defaults.phone} required />
         <span className="field-hint">We&apos;ll call to confirm your booking</span>
       </div>
       <div className="form-field">

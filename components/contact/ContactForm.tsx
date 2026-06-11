@@ -30,7 +30,6 @@ export function ContactForm() {
         <select id="contact-subject" name="subject" required defaultValue="">
           <option value="">Select a topic</option>
           <option value="booking">Service Booking</option>
-          <option value="worker">Worker Registration</option>
           <option value="partnership">Business Partnership</option>
           <option value="support">Support / Complaint</option>
           <option value="other">Other</option>

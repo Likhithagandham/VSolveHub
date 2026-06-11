@@ -10,6 +10,7 @@ export const CATEGORIES = [
     id: 'construction',
     name: 'Construction Labour',
     shortName: 'Construction',
+    gridLabel: 'Construction Labour',
     tagline: 'Helper, mason, painter, tile & 10 more trades',
     icon: 'brick',
     count: 85,
@@ -18,6 +19,8 @@ export const CATEGORIES = [
     id: 'technician',
     name: 'Technician Services',
     shortName: 'Technician',
+    gridLabel: 'Electrician, Plumber & More',
+    eta: '44 mins',
     tagline: 'Electrician, plumber, AC, CCTV & 10 more',
     icon: 'bolt',
     count: 176,
@@ -26,6 +29,7 @@ export const CATEGORIES = [
     id: 'manpower',
     name: 'Manpower & Support',
     shortName: 'Manpower',
+    gridLabel: 'Cleaning & Manpower',
     tagline: 'Cleaning, drivers, security, domestic & support staff',
     icon: 'clean',
     count: 54,
@@ -34,6 +38,8 @@ export const CATEGORIES = [
     id: 'beautician',
     name: 'Beautician & Wedding',
     shortName: 'Beautician',
+    gridLabel: 'Beautician & Wedding',
+    eta: '57 mins',
     tagline: 'Facial, waxing, makeup, hair & bridal packages',
     icon: 'makeup',
     count: 98,
@@ -42,6 +48,7 @@ export const CATEGORIES = [
     id: 'events',
     name: 'Events & Media',
     shortName: 'Events',
+    gridLabel: 'Events & Photography',
     tagline: 'Photography, decor, DJ, catering & event management',
     icon: 'camera',
     count: 109,
@@ -50,6 +57,7 @@ export const CATEGORIES = [
     id: 'rental',
     name: 'Equipment Rental',
     shortName: 'Rental',
+    gridLabel: 'Equipment Rental',
     tagline: 'Furniture, tents, sound, tools & appliances',
     icon: 'chair',
     count: 101,
@@ -58,6 +66,7 @@ export const CATEGORIES = [
     id: 'vehicle',
     name: 'Vehicle Services',
     shortName: 'Vehicle',
+    gridLabel: 'Vehicle Services',
     tagline: 'Rides, taxi, transport, repair & EV',
     icon: 'auto',
     count: 133,
@@ -66,17 +75,10 @@ export const CATEGORIES = [
     id: 'accommodation',
     name: 'Rooms / PG / Hostel',
     shortName: 'Stay',
+    gridLabel: 'Rooms, PG & Hostel',
     tagline: 'Rooms, PG, hostels, apartments & co-living',
     icon: 'office',
-    count: 94,
-  },
-  {
-    id: 'jobs',
-    name: 'Job Opportunities',
-    shortName: 'Jobs',
-    tagline: 'Retail, healthcare, IT, drivers & 200+ roles',
-    icon: 'guard',
-    count: 222,
+    count: 93,
   },
 ];
 
@@ -275,54 +277,6 @@ function buildManpowerServices() {
   return buildCatalogServices(MANPOWER_CATALOG, 'manpower', 9001, manpowerPrice);
 }
 
-const JOBS_CATALOG = [
-  { subCategory: 'Retail & Shop Staff', icon: 'sales', services: ['Sales Boys', 'Sales Girls', 'Showroom Executives', 'Cashiers', 'Billing Staff', 'Store Assistants', 'Store Managers', 'Inventory Staff', 'Merchandisers', 'Supermarket Staff'] },
-  { subCategory: 'Health Care Jobs', icon: 'office', services: ['Staff Nurses', 'Home Nurses', 'Ward Boys', 'Ward Girls', 'Lab Assistants', 'Pharmacy Assistants', 'Clinic Receptionists', 'Patient Care Takers', 'Physiotherapists', 'Medical Representatives', 'Doctors', 'Dentists', 'Radiology Technicians'] },
-  { subCategory: 'Hotels & Restaurant Jobs', icon: 'chair', services: ['Waiters', 'Waitresses', 'Cooks', 'Chefs', 'Kitchen Helpers', 'Dish Washers', 'Hotel Receptionists', 'Room Service Staff', 'Housekeeping Staff', 'Restaurant Managers', 'Baristas', 'Bakers'] },
-  { subCategory: 'Office & Admin Jobs', icon: 'office', services: ['Office Assistants', 'Back Office Executives', 'Receptionists', 'Front Desk Executives', 'Data Entry Operators', 'HR Assistants', 'Admin Executives', 'Office Coordinators', 'Personal Assistants', 'Office Managers'] },
-  { subCategory: 'Delivery & Logistics Jobs', icon: 'driver', services: ['Delivery Boys', 'Delivery Riders', 'Courier Delivery Staff', 'Warehouse Pickers', 'Packers', 'Dispatch Executives', 'Logistics Coordinators', 'Inventory Executives', 'Loading Staff', 'Unloading Staff'] },
-  { subCategory: 'Factory & Industrial Jobs', icon: 'hammer', services: ['Factory Workers', 'Machine Operators', 'Helpers', 'Quality Check Staff', 'Supervisors', 'Production Operators', 'Assembly Line Workers', 'Store Keepers', 'Packaging Staff', 'Forklift Operators'] },
-  { subCategory: 'Construction Jobs', icon: 'brick', services: ['Masons', 'Helpers', 'Bar Benders', 'Shuttering Carpenters', 'Welders', 'Painters', 'Tile Workers', 'Construction Supervisors', 'Site Engineers', 'Quantity Surveyors', 'Civil Engineers', 'Surveyors'] },
-  { subCategory: 'Technician Jobs', icon: 'bolt', services: ['Electricians', 'Plumbers', 'Carpenters', 'AC Technicians', 'CCTV Technicians', 'Computer Technicians', 'Mobile Technicians', 'RO Technicians', 'Gas Stove Technicians', 'Locksmiths', 'Internet/WiFi Technicians', 'Home Appliance Technicians', 'Elevator Technicians', 'Solar Technicians'] },
-  { subCategory: 'Vehicle & Transport Jobs', icon: 'auto', services: ['Auto Drivers', 'Cab Drivers', 'Truck Drivers', 'Tempo Drivers', 'Bus Drivers', 'Heavy Vehicle Drivers', 'Vehicle Mechanics', 'Bike Mechanics', 'Car Wash Staff', 'Tow Truck Operators'] },
-  { subCategory: 'Security Jobs', icon: 'guard', services: ['Security Guards', 'Bouncers', 'Watchmen', 'Gate Security', 'Security Supervisors', 'CCTV Operators'] },
-  { subCategory: 'Domestic Jobs', icon: 'clean', services: ['Maids', 'Cooks', 'Babysitters', 'Elder Care Staff', 'House Helpers', 'Housekeepers'] },
-  { subCategory: 'Driver Jobs', icon: 'driver', services: ['Personal Drivers', 'Company Drivers', 'Delivery Drivers', 'Truck Drivers', 'School Bus Drivers', 'Chauffeurs'] },
-  { subCategory: 'Sales & Marketing Jobs', icon: 'sales', services: ['Field Sales Executives', 'Sales Promoters', 'Telecallers', 'Marketing Executives', 'Business Development Executives', 'Relationship Managers', 'Brand Executives', 'Digital Marketing Executives'] },
-  { subCategory: 'Customer Support Jobs', icon: 'office', services: ['Call Center Executives', 'Customer Support Executives', 'Chat Support Executives', 'Telecallers', 'Customer Care Executives', 'Process Associates'] },
-  { subCategory: 'Event & Promotion Jobs', icon: 'decor', services: ['Event Staff', 'Brand Promoters', 'Campaign Staff', 'Exhibition Staff', 'Sampling Promoters'] },
-  { subCategory: 'Event & Media Jobs', icon: 'camera', services: ['Photographers', 'Videographers', 'Video Editors', 'DJs', 'Event Coordinators', 'Graphic Designers', 'Social Media Managers', 'Content Creators'] },
-  { subCategory: 'Education Jobs', icon: 'office', services: ['Teachers', 'Tutors', 'Trainers', 'Coaching Staff', 'Online Tutors', 'Spoken English Trainers', 'Lecturers', 'Professors'] },
-  { subCategory: 'Cleaning & Maintenance Jobs', icon: 'clean', services: ['Housekeeping Staff', 'Office Cleaning Staff', 'Janitors', 'Maintenance Workers', 'Deep Cleaning Staff', 'Pest Control Technicians'] },
-  { subCategory: 'IT & Software Jobs', icon: 'bolt', services: ['Software Developers', 'Web Developers', 'App Developers', 'UI/UX Designers', 'Graphic Designers', 'SEO Executives', 'Content Writers', 'Data Analysts', 'Data Scientists', 'AI Engineers', 'Cyber Security Analysts', 'Cloud Engineers', 'DevOps Engineers', 'Software Testers'] },
-  { subCategory: 'Finance & Accounts Jobs', icon: 'office', services: ['Accountants', 'Account Executives', 'Auditors', 'GST Executives', 'Tax Consultants', 'Payroll Executives', 'Finance Managers', 'Banking Executives'] },
-  { subCategory: 'Beauty & Wellness Jobs', icon: 'makeup', services: ['Beauticians', 'Hair Stylists', 'Makeup Artists', 'Spa Therapists', 'Nail Artists', 'Mehendi Artists'] },
-  { subCategory: 'Business Services Jobs', icon: 'office', services: ['GST Consultants', 'Company Secretaries', 'Legal Assistants', 'Business Consultants', 'Insurance Advisors', 'Loan Consultants'] },
-  { subCategory: 'Government Jobs', icon: 'guard', services: ['Central Government Jobs', 'State Government Jobs', 'Railway Jobs', 'Bank Jobs', 'Police Jobs', 'Defence Jobs'] },
-  { subCategory: 'Banking & Insurance Jobs', icon: 'office', services: ['Bank Officer', 'Relationship Manager', 'Insurance Advisor', 'Loan Officer'] },
-  { subCategory: 'Legal Jobs', icon: 'guard', services: ['Advocates', 'Legal Advisors', 'Legal Assistants'] },
-  { subCategory: 'HR & Recruitment Jobs', icon: 'office', services: ['HR Executives', 'Recruiters', 'Talent Acquisition Specialists'] },
-  { subCategory: 'Real Estate Jobs', icon: 'office', services: ['Property Advisors', 'Real Estate Sales Executives', 'Property Managers'] },
-  { subCategory: 'BPO & Call Center Jobs', icon: 'office', services: ['Voice Process Executive', 'Non Voice Process Executive', 'Technical Support Executive'] },
-  { subCategory: 'Work From Home Jobs', icon: 'office', services: ['Data Entry Work', 'Online Tutor', 'Content Writer', 'Customer Support Executive'] },
-  { subCategory: 'Freelance Jobs', icon: 'sales', services: ['Graphic Designer', 'Web Developer', 'Photographer', 'Digital Marketer'] },
-  { subCategory: 'Internship Jobs', icon: 'office', services: ['Engineering Intern', 'Marketing Intern', 'HR Intern', 'Accounts Intern'] },
-];
-
-function jobsPrice(name) {
-  if (/Doctor|Dentist|Professor|AI Engineer|Software Developer|Data Scientist|Cyber Security/.test(name)) return 'Salary negotiable';
-  if (/Government|Railway|Bank Jobs|Police|Defence/.test(name)) return 'As per govt norms';
-  if (/Intern|Helper|Delivery Boy|Delivery Rider|Ward Boy|Ward Girl/.test(name)) return 'From ₹8,000/month';
-  return 'From ₹12,000/month';
-}
-
-function buildJobsServices() {
-  return buildCatalogServices(JOBS_CATALOG, 'jobs', 8001, jobsPrice).map((s) => ({
-    ...s,
-    description: `Hire verified ${s.name} — temp, contract or full-time placements.`,
-  }));
-}
-
 function buildCatalogServices(catalog, categoryId, startId, priceFn) {
   let id = startId;
   return catalog.flatMap((group) =>
@@ -347,7 +301,6 @@ const CATEGORY_CATALOGS = {
   rental: RENTAL_CATALOG,
   vehicle: VEHICLE_CATALOG,
   accommodation: ACCOMMODATION_CATALOG,
-  jobs: JOBS_CATALOG,
 };
 
 export function getCategoryCatalog(categoryId: string) {
@@ -363,8 +316,21 @@ export const SERVICES = [
   ...buildRentalServices(),
   ...buildVehicleServices(),
   ...buildAccommodationServices(),
-  ...buildJobsServices(),
 ];
+
+export const TOP_PROFESSIONALS = [
+  { id: 'suresh', name: 'Suresh K.', role: 'Master Plumber', rating: 4.9, reviews: 124, initials: 'SK', categoryId: 'technician' },
+  { id: 'meena', name: 'Meena R.', role: 'Bridal Makeup Artist', rating: 4.8, reviews: 89, initials: 'MR', categoryId: 'beautician' },
+  { id: 'amit', name: 'Amit S.', role: 'Master Electrician', rating: 4.9, reviews: 201, initials: 'AS', categoryId: 'technician' },
+  { id: 'rajesh', name: 'Rajesh M.', role: 'AC Technician', rating: 4.7, reviews: 156, initials: 'RM', categoryId: 'technician' },
+];
+
+export const DEMO_ONGOING_BOOKING = {
+  workerName: 'Amit Singh',
+  role: 'Master Electrician',
+  status: 'On the way',
+  icon: 'bolt' as const,
+};
 
 export const TESTIMONIALS = [
   { quote: 'Booked an electrician in 10 minutes. The worker arrived on time and fixed everything.', author: 'Priya', city: 'Hyderabad' },
@@ -426,6 +392,56 @@ export function getSubCategories(categoryId: string) {
   return getServicesByCategory(categoryId)
     .map((s) => s.subCategory)
     .filter((sc) => sc && !seen.has(sc) && seen.add(sc));
+}
+
+export function slugifySubCategory(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+export function getSubCategoryBySlug(categoryId: string, slug: string) {
+  const catalog = getCategoryCatalog(categoryId);
+  const subCategories = getSubCategories(categoryId);
+  const match = subCategories.find((sc) => slugifySubCategory(sc) === slug);
+  if (!match) return null;
+  const group = catalog?.find((g) => g.subCategory === match);
+  return { name: match, icon: group?.icon ?? 'office', slug };
+}
+
+export function getSubCategoryGroups(categoryId: string) {
+  const catalog = getCategoryCatalog(categoryId);
+  if (catalog) {
+    return catalog.map((group) => ({
+      name: group.subCategory,
+      slug: slugifySubCategory(group.subCategory),
+      icon: group.icon,
+      count: getServicesBySubCategory(categoryId, group.subCategory).length,
+    }));
+  }
+  return getSubCategories(categoryId).map((name) => ({
+    name,
+    slug: slugifySubCategory(name),
+    icon: getServicesBySubCategory(categoryId, name)[0]?.icon ?? 'office',
+    count: getServicesBySubCategory(categoryId, name).length,
+  }));
+}
+
+export function getTotalServiceCount() {
+  return SERVICES.length;
+}
+
+export function searchServices(query: string, categoryId?: string) {
+  const q = query.trim().toLowerCase();
+  const pool = categoryId ? getServicesByCategory(categoryId) : SERVICES;
+  if (!q) return pool;
+  return pool.filter(
+    (s) =>
+      s.name.toLowerCase().includes(q) ||
+      s.subCategory.toLowerCase().includes(q) ||
+      s.description.toLowerCase().includes(q),
+  );
 }
 
 export function getWhatsAppUrl(message: string) {
@@ -563,15 +579,6 @@ export const FAQ_DATA = [
     items: [
       { q: 'Is delivery included for chair and table rental?', a: 'Delivery and pickup are included within city limits. Outstation delivery is quoted separately.' },
       { q: 'What is the minimum rental period?', a: 'Most equipment is rented per day. Generators and LED screens can be booked for half-day or multi-day events.' },
-    ],
-  },
-  {
-    category: 'jobs',
-    title: 'Workers & Jobs',
-    items: [
-      { q: 'How do I register as a worker?', a: 'Visit our Job Opportunities page, fill in your skill and area, verify your phone with OTP, and our team will contact you within 24–48 hours.' },
-      { q: 'How do workers get paid?', a: 'Workers receive payment through the VSolveHub Worker App after job completion. Earnings can be tracked in real time.' },
-      { q: 'Is there a registration fee for workers?', a: 'No. Worker registration is free. We only earn when you complete jobs through the platform.' },
     ],
   },
 ];
