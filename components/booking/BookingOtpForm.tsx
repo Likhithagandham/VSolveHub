@@ -49,10 +49,7 @@ export function BookingOtpForm() {
 
   return (
     <>
-      <p className="lead-hint">
-        Confirm booking for {booking.serviceName}. Verify +91 {booking.phone}.
-      </p>
-      <p className="lead-hint" id="otp-demo-hint">
+      <p className="booking-step-hint" id="otp-demo-hint">
         Demo OTP: {otpCode} (sent to +91 {booking.phone.slice(0, 2)}******{booking.phone.slice(-2)})
       </p>
       <form id="booking-otp-form" onSubmit={onSubmit}>

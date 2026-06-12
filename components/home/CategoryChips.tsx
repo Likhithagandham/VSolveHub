@@ -5,7 +5,11 @@ import { Emoji3D } from '@/components/ui/Emoji3D';
 
 export function CategoryChips() {
   return (
-    <div className="home-categories">
+    <section className="home-categories" aria-labelledby="home-categories-heading">
+      <div className="home-section-head">
+        <h2 id="home-categories-heading" className="home-section-title">Categories</h2>
+        <Link href="/services" className="home-section-link">View all</Link>
+      </div>
       <div className="category-grid" role="list">
         {CATEGORIES.map((cat) => (
           <Link
@@ -26,6 +30,6 @@ export function CategoryChips() {
           </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

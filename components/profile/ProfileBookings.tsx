@@ -103,7 +103,7 @@ export function ProfileBookings() {
   }, [bookings, filter]);
 
   return (
-    <ProfileSubPage title="My bookings">
+    <ProfileSubPage title="My bookings" backHref="/">
       {!ready || !profile ? (
         <p className="bookings-summary">Loading your bookings…</p>
       ) : (

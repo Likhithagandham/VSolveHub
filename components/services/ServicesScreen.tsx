@@ -3,40 +3,17 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import {
-  ARROW_SVG,
   CATEGORIES,
-  getCategory,
+  FEATURED_PICKS,
+  POPULAR_SEARCHES,
+  filterCategories,
   getServicesByCategory,
   getTotalServiceCount,
   searchServices,
 } from '@/lib/data';
-import { getCategoryEmoji3d } from '@/lib/emoji-3d';
-import { Emoji3D } from '@/components/ui/Emoji3D';
-import { Icon } from '@/components/ui/Icon';
-
-function ServiceResultCard({
-  categoryId,
-  service,
-}: {
-  categoryId: string;
-  service: ReturnType<typeof getServicesByCategory>[number];
-}) {
-  const category = getCategory(categoryId);
-  return (
-    <Link href={`/services/${categoryId}/${service.id}`} className="services-result-card">
-      <div className="services-result-icon">
-        <Icon name={service.icon} />
-      </div>
-      <div className="services-result-body">
-        <p className="services-result-cat">{category?.shortName ?? categoryId}</p>
-        <h3 className="services-result-title">{service.name}</h3>
-        <p className="services-result-desc">{service.description}</p>
-        <p className="services-result-price">{service.price}</p>
-      </div>
-      <span className="services-result-arrow" aria-hidden="true" dangerouslySetInnerHTML={{ __html: ARROW_SVG }} />
-    </Link>
-  );
-}
+import { CategoryCardList } from './CategoryCardList';
+import { ServicesSearchBar } from './ServicesSearchBar';
+import { ServiceResultCard } from './ServiceResultCard';
 
 export function ServicesScreen() {
   const [query, setQuery] = useState('');
@@ -44,77 +21,125 @@ export function ServicesScreen() {
   const trimmed = query.trim();
   const searching = trimmed.length > 0;
 
-  const searchResults = useMemo(() => {
+  const filteredCategories = useMemo(() => filterCategories(trimmed), [trimmed]);
+  const serviceResults = useMemo(() => {
     if (!searching) return [];
     return searchServices(trimmed);
   }, [trimmed, searching]);
 
   return (
     <div className="services-page" id="categories">
-      <header className="services-header">
+      <header className="services-header services-header--hub">
         <div className="services-header-text">
           <p className="services-eyebrow">Browse catalog</p>
           <h1>Services</h1>
           <p className="services-tagline">{total}+ doorstep services across {CATEGORIES.length} categories</p>
         </div>
+        <div className="services-stats" aria-label="Service highlights">
+          <div className="services-stat">
+            <strong>{total}+</strong>
+            <span>Services</span>
+          </div>
+          <div className="services-stat">
+            <strong>{CATEGORIES.length}</strong>
+            <span>Categories</span>
+          </div>
+          <div className="services-stat">
+            <strong>30m</strong>
+            <span>Callback</span>
+          </div>
+        </div>
       </header>
 
-      <main className="services-main">
-        <div className="services-search-bar">
-          <span className="services-search-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" />
-            </svg>
-          </span>
-          <input
-            type="search"
-            className="services-search-input"
-            placeholder="Search services (electrician, cleaning, rental…)"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            aria-label="Search services"
-          />
+      <main className="services-main services-main--hub">
+        <ServicesSearchBar
+          value={query}
+          onChange={setQuery}
+          placeholder="Search categories or services (electrician, cleaning…)"
+          label="Search categories and services"
+        />
+
+        <div className="services-quick-chips" role="list" aria-label="Popular searches">
+          {POPULAR_SEARCHES.map((term) => (
+            <button
+              key={term}
+              type="button"
+              role="listitem"
+              className="services-quick-chip"
+              onClick={() => setQuery(term)}
+            >
+              {term}
+            </button>
+          ))}
         </div>
 
         {searching ? (
           <section className="services-results" aria-live="polite">
-            <p className="services-results-meta">
-              {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} for &ldquo;{trimmed}&rdquo;
-            </p>
-            {searchResults.length === 0 ? (
-              <p className="services-empty">No services match your search. Try another keyword.</p>
-            ) : (
-              <div className="services-results-list">
-                {searchResults.map((service) => (
-                  <ServiceResultCard key={service.id} categoryId={service.category} service={service} />
-                ))}
-              </div>
-            )}
+            {filteredCategories.length > 0 ? (
+              <section className="services-cat-grid-section" aria-label="Matching categories">
+                <p className="services-results-meta">
+                  {filteredCategories.length} categor{filteredCategories.length !== 1 ? 'ies' : 'y'} for &ldquo;{trimmed}&rdquo;
+                </p>
+                <CategoryCardList categories={filteredCategories} />
+              </section>
+            ) : null}
+
+            {serviceResults.length > 0 ? (
+              <>
+                <p className="services-results-meta services-results-meta--spaced">
+                  {serviceResults.length} service{serviceResults.length !== 1 ? 's' : ''} for &ldquo;{trimmed}&rdquo;
+                </p>
+                <div className="services-results-list">
+                  {serviceResults.map((service) => (
+                    <ServiceResultCard key={service.id} categoryId={service.category} service={service} />
+                  ))}
+                </div>
+              </>
+            ) : null}
+
+            {filteredCategories.length === 0 && serviceResults.length === 0 ? (
+              <p className="services-empty">No categories or services match your search.</p>
+            ) : null}
           </section>
         ) : (
-          <section className="services-cat-grid-section" aria-label="Service categories">
-            <h2 className="services-section-title">Choose a category</h2>
-            <div className="category-grid" role="list">
-              {CATEGORIES.map((cat) => {
-                const count = getServicesByCategory(cat.id).length;
-                return (
+          <>
+            <section className="services-featured" aria-label="Popular services">
+              <h2 className="services-section-title">Popular right now</h2>
+              <div className="services-featured-scroll">
+                {FEATURED_PICKS.map((pick) => (
                   <Link
-                    key={cat.id}
-                    href={`/services/${cat.id}`}
-                    className="category-grid-item"
-                    role="listitem"
+                    key={`${pick.categoryId}-${pick.slug}`}
+                    href={`/services/${pick.categoryId}/${pick.slug}`}
+                    className="services-featured-card"
                   >
-                    <span className="category-grid-icon-wrap" aria-hidden="true">
-                      <Emoji3D {...getCategoryEmoji3d(cat.id)} className="category-grid-emoji" />
-                      {cat.eta ? <span className="category-grid-badge">{cat.eta}</span> : null}
-                    </span>
-                    <span className="category-grid-label">{cat.gridLabel ?? cat.shortName}</span>
-                    <span className="category-grid-count">{count} services</span>
+                    <span className="services-featured-label">{pick.label}</span>
+                    <span className="services-featured-sub">{pick.subtitle}</span>
                   </Link>
-                );
-              })}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+
+            <section className="services-cat-grid-section" aria-label="Service categories">
+              <h2 className="services-section-title">All categories</h2>
+              <p className="services-section-sub">Pick a category, then a sub-category, then book your service.</p>
+              <CategoryCardList categories={CATEGORIES} />
+            </section>
+
+            <section className="services-trust" aria-label="Why VSolveHub">
+              <div className="services-trust-item">
+                <strong>Verified pros</strong>
+                <span>Background-checked workers</span>
+              </div>
+              <div className="services-trust-item">
+                <strong>Transparent pricing</strong>
+                <span>No hidden charges</span>
+              </div>
+              <div className="services-trust-item">
+                <strong>Quick callback</strong>
+                <span>We call within 30 minutes</span>
+              </div>
+            </section>
+          </>
         )}
       </main>
     </div>

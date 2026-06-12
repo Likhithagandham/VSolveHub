@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 const NAV = [
   { href: '/', label: 'Home', icon: 'home' },
   { href: '/services', label: 'Services', icon: 'services' },
-  { href: '/booking/track', label: 'Bookings', icon: 'bookings' },
+  { href: '/profile/bookings', label: 'Bookings', icon: 'bookings' },
   { href: '/profile', label: 'Profile', icon: 'profile' },
 ] as const;
 
@@ -50,8 +50,14 @@ function isActive(pathname: string, href: string) {
   if (href === '/services') {
     return pathname === '/services' || pathname.startsWith('/services/');
   }
+  if (href === '/profile/bookings') {
+    return pathname === '/profile/bookings' || pathname.startsWith('/booking/');
+  }
   if (href === '/profile') {
-    return pathname === '/profile' || pathname.startsWith('/profile/');
+    return (
+      pathname === '/profile' ||
+      (pathname.startsWith('/profile/') && pathname !== '/profile/bookings')
+    );
   }
   return pathname === href || pathname.startsWith(`${href}/`);
 }

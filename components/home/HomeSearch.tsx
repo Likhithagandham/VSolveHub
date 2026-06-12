@@ -12,13 +12,13 @@ export function HomeSearch() {
     e.preventDefault();
     const q = query.trim().toLowerCase();
     if (!q) {
-      router.push('/services/technician');
+      router.push('/services');
       return;
     }
     const match =
       CATEGORIES.find((c) => c.name.toLowerCase().includes(q) || c.shortName.toLowerCase().includes(q)) ??
       CATEGORIES.find((c) => c.tagline.toLowerCase().includes(q));
-    router.push(match ? `/services/${match.id}` : '/services/technician');
+    router.push(match ? `/services/${match.id}` : '/services');
   }
 
   return (

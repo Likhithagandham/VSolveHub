@@ -1,17 +1,28 @@
+'use client';
+
 import Link from 'next/link';
 import { ARROW_SVG, getSubCategoryGroups } from '@/lib/data';
 import { Icon } from '@/components/ui/Icon';
 
-type SubcategoryListProps = {
-  categoryId: string;
+type SubCategoryGroup = {
+  slug: string;
+  name: string;
+  icon: string;
+  count: number;
+  preview?: string;
 };
 
-export function SubcategoryList({ categoryId }: SubcategoryListProps) {
-  const groups = getSubCategoryGroups(categoryId);
+type SubcategoryListProps = {
+  categoryId: string;
+  groups?: SubCategoryGroup[];
+};
+
+export function SubcategoryList({ categoryId, groups }: SubcategoryListProps) {
+  const items = groups ?? getSubCategoryGroups(categoryId);
 
   return (
     <div className="subcategory-list" role="list">
-      {groups.map((group: { slug: string; name: string; icon: string; count: number }) => (
+      {items.map((group: SubCategoryGroup) => (
         <Link
           key={group.slug}
           href={`/services/${categoryId}/${group.slug}`}
@@ -23,8 +34,11 @@ export function SubcategoryList({ categoryId }: SubcategoryListProps) {
           </span>
           <span className="subcategory-list-body">
             <span className="subcategory-list-title">{group.name}</span>
+            {group.preview ? (
+              <span className="subcategory-list-preview">{group.preview}</span>
+            ) : null}
             <span className="subcategory-list-meta">
-              {group.count} service{group.count !== 1 ? 's' : ''}
+              {group.count} service{group.count !== 1 ? 's' : ''} available
             </span>
           </span>
           <span

@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -20,19 +21,40 @@ export function BookingSummary() {
 
   if (!booking) return null;
 
+  const rows: { label: string; value: ReactNode }[] = [
+    { label: 'Service', value: booking.serviceName },
+    { label: 'Category', value: booking.categoryName },
+    { label: 'Name', value: booking.name },
+    { label: 'Phone', value: `+91 ${booking.phone}` },
+    { label: 'Date', value: booking.date },
+    { label: 'Location', value: booking.location },
+    {
+      label: 'Status',
+      value: <span className="status-badge status-confirmed">Confirmed</span>,
+    },
+  ];
+
   return (
     <div className="booking-summary">
-      <p className="booking-ref">Reference: <strong>{booking.bookingId}</strong></p>
+      <p className="booking-ref">
+        Reference <strong>{booking.bookingId}</strong>
+      </p>
       <ul className="booking-details">
-        <li><span>Service</span><span>{booking.serviceName}</span></li>
-        <li><span>Category</span><span>{booking.categoryName}</span></li>
-        <li><span>Name</span><span>{booking.name}</span></li>
-        <li><span>Phone</span><span>+91 {booking.phone}</span></li>
-        <li><span>Date</span><span>{booking.date}</span></li>
-        <li><span>Location</span><span>{booking.location}</span></li>
-        <li><span>Status</span><span className="status-badge status-confirmed">Confirmed</span></li>
+        {rows.map((row) => (
+          <li key={row.label}>
+            <span className="booking-details-label">{row.label}</span>
+            <span className="booking-details-value">{row.value}</span>
+          </li>
+        ))}
       </ul>
-      <Link href="/booking/track" className="btn-primary">Track Booking</Link>
+      <div className="booking-actions">
+        <Link href="/booking/track" className="btn-primary booking-track-btn">
+          Track booking
+        </Link>
+        <Link href="/profile/bookings" className="btn-secondary booking-list-btn">
+          View all bookings
+        </Link>
+      </div>
     </div>
   );
 }

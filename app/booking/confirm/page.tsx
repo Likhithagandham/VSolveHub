@@ -4,12 +4,13 @@ export const metadata = { title: 'Booking Confirmed — VSolveHub' };
 
 export default function ConfirmPage() {
   return (
-    <section className="section booking-card-section">
-      <div className="section-inner booking-card">
-        <h1 className="section-title">Booking confirmed</h1>
-        <p className="lead-hint">We&apos;ve received your request. A VSolveHub coordinator will call you shortly.</p>
-        <BookingSummary />
+    <section className="booking-confirm">
+      <div className="booking-confirm-hero">
+        <span className="confirm-icon" aria-hidden="true">✓</span>
+        <h1>Booking confirmed</h1>
+        <p>We&apos;ve received your request. A VSolveHub coordinator will call you shortly.</p>
       </div>
+      <BookingSummary />
     </section>
   );
 }

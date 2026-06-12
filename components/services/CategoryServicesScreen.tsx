@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getSubCategoryGroups } from '@/lib/data';
 import { CategoryHeaderEmoji } from './CategoryHeaderEmoji';
+import { CategoryServicesShell } from './CategoryServicesShell';
 import { SubcategoryList } from './SubcategoryList';
 
 type CategoryServicesScreenProps = {
@@ -45,8 +46,9 @@ export function CategoryServicesScreen({
           <span aria-hidden="true">/</span>
           <span aria-current="page">{name}</span>
         </nav>
-        <h2 className="services-section-title">Choose a sub-category</h2>
-        <SubcategoryList categoryId={categoryId} />
+        <CategoryServicesShell categoryId={categoryId} categoryName={name}>
+          <SubcategoryList categoryId={categoryId} />
+        </CategoryServicesShell>
       </main>
     </div>
   );

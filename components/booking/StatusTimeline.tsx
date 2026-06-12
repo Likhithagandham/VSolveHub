@@ -1,24 +1,31 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { BOOKING_STATUSES, Booking, getBooking } from '@/lib/data';
 import { getProfileData } from '@/lib/profile-store';
 
 export function StatusTimeline() {
-  const router = useRouter();
   const [booking, setBooking] = useState<Booking | null>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const b = getBooking() ?? getProfileData().bookings[0] ?? null;
-    if (!b) {
-      router.replace('/profile/bookings');
-      return;
-    }
     setBooking(b);
-  }, [router]);
+    setReady(true);
+  }, []);
 
-  if (!booking) return null;
+  if (!ready) return null;
+
+  if (!booking) {
+    return (
+      <div className="bookings-empty bookings-empty--inline">
+        <h2>No active booking to track</h2>
+        <p>Book a service or open an existing booking from your list.</p>
+        <Link href="/profile/bookings" className="btn-primary bookings-empty-cta">View my bookings</Link>
+      </div>
+    );
+  }
 
   const currentStep = BOOKING_STATUSES.find((s) => s.id === booking.status)?.step ?? 1;
 
@@ -36,7 +43,7 @@ export function StatusTimeline() {
           </li>
         ))}
       </ol>
-      <p className="lead-hint">{booking.serviceName} · {booking.date} · {booking.location}</p>
+      <p className="booking-step-hint">{booking.serviceName} · {booking.date} · {booking.location}</p>
     </div>
   );
 }

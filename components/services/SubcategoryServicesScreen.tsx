@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ServiceListing } from './ServiceListing';
+import { SubcategoryServicesShell } from './SubcategoryServicesShell';
 
 type SubcategoryServicesScreenProps = {
   categoryId: string;
@@ -43,7 +44,9 @@ export function SubcategoryServicesScreen({
           <span aria-hidden="true">/</span>
           <span aria-current="page">{subCategory}</span>
         </nav>
-        <ServiceListing categoryId={categoryId} subCategory={subCategory} />
+        <SubcategoryServicesShell categoryId={categoryId} subCategory={subCategory}>
+          <ServiceListing categoryId={categoryId} subCategory={subCategory} />
+        </SubcategoryServicesShell>
       </main>
     </div>
   );

@@ -418,15 +418,45 @@ export function getSubCategoryGroups(categoryId: string) {
       slug: slugifySubCategory(group.subCategory),
       icon: group.icon,
       count: getServicesBySubCategory(categoryId, group.subCategory).length,
+      preview: group.services.slice(0, 3).join(' · '),
     }));
   }
-  return getSubCategories(categoryId).map((name) => ({
-    name,
-    slug: slugifySubCategory(name),
-    icon: getServicesBySubCategory(categoryId, name)[0]?.icon ?? 'office',
-    count: getServicesBySubCategory(categoryId, name).length,
-  }));
+  return getSubCategories(categoryId).map((name) => {
+    const services = getServicesBySubCategory(categoryId, name);
+    return {
+      name,
+      slug: slugifySubCategory(name),
+      icon: services[0]?.icon ?? 'office',
+      count: services.length,
+      preview: services
+        .slice(0, 3)
+        .map((s) => s.name)
+        .join(' · '),
+    };
+  });
 }
+
+export const POPULAR_SEARCHES = [
+  'Electrician',
+  'Plumber',
+  'AC service',
+  'Cleaning',
+  'Painting',
+  'Bridal makeup',
+  'Photography',
+  'Car wash',
+];
+
+export const FEATURED_PICKS = [
+  { categoryId: 'technician', slug: 'electrician', label: 'Electrician', subtitle: 'Wiring, fans & repairs' },
+  { categoryId: 'technician', slug: 'plumbing', label: 'Plumber', subtitle: 'Leaks, taps & fittings' },
+  { categoryId: 'technician', slug: 'ac-technician', label: 'AC Service', subtitle: 'Install & gas fill' },
+  { categoryId: 'construction', slug: 'painter', label: 'Painting', subtitle: 'Interior & exterior' },
+  { categoryId: 'beautician', slug: 'makeup-full-range', label: 'Makeup', subtitle: 'Party & bridal' },
+  { categoryId: 'manpower', slug: 'cleaning-maintenance-staff', label: 'Cleaning', subtitle: 'Home & office staff' },
+  { categoryId: 'events', slug: 'photography', label: 'Photography', subtitle: 'Wedding & events' },
+  { categoryId: 'vehicle', slug: 'vehicle-washing-cleaning', label: 'Car Wash', subtitle: 'Wash & detailing' },
+];
 
 export function getTotalServiceCount() {
   return SERVICES.length;
@@ -442,6 +472,34 @@ export function searchServices(query: string, categoryId?: string) {
       s.subCategory.toLowerCase().includes(q) ||
       s.description.toLowerCase().includes(q),
   );
+}
+
+export function searchServicesInSubCategory(categoryId: string, subCategory: string, query: string) {
+  const q = query.trim().toLowerCase();
+  const pool = getServicesBySubCategory(categoryId, subCategory);
+  if (!q) return pool;
+  return pool.filter(
+    (s) => s.name.toLowerCase().includes(q) || s.description.toLowerCase().includes(q),
+  );
+}
+
+export function filterCategories(query: string) {
+  const q = query.trim().toLowerCase();
+  if (!q) return CATEGORIES;
+  return CATEGORIES.filter(
+    (c) =>
+      c.name.toLowerCase().includes(q) ||
+      c.shortName.toLowerCase().includes(q) ||
+      c.tagline.toLowerCase().includes(q) ||
+      (c.gridLabel?.toLowerCase().includes(q) ?? false),
+  );
+}
+
+export function filterSubCategoryGroups(categoryId: string, query: string) {
+  const q = query.trim().toLowerCase();
+  const groups = getSubCategoryGroups(categoryId);
+  if (!q) return groups;
+  return groups.filter((g) => g.name.toLowerCase().includes(q));
 }
 
 export function getWhatsAppUrl(message: string) {

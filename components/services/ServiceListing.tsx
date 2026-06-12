@@ -4,16 +4,24 @@ import Link from 'next/link';
 import { ARROW_SVG, getServicesByCategory, getServicesBySubCategory } from '@/lib/data';
 import { Icon } from '@/components/ui/Icon';
 
+type Service = ReturnType<typeof getServicesByCategory>[number];
+
 type ServiceListingProps = {
   categoryId: string;
   subCategory?: string;
-  subSlug?: string;
+  services?: Service[];
 };
 
-export function ServiceListing({ categoryId, subCategory }: ServiceListingProps) {
-  const services = subCategory
-    ? getServicesBySubCategory(categoryId, subCategory)
-    : getServicesByCategory(categoryId);
+export function ServiceListing({ categoryId, subCategory, services: servicesProp }: ServiceListingProps) {
+  const services =
+    servicesProp ??
+    (subCategory
+      ? getServicesBySubCategory(categoryId, subCategory)
+      : getServicesByCategory(categoryId));
+
+  if (services.length === 0) {
+    return <p className="services-empty">No services available in this section yet.</p>;
+  }
 
   return (
     <div className="sub-services-grid">
